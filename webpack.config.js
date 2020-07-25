@@ -1,13 +1,16 @@
 const path =   require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports={
     entry: './src/index.js',
     output: {
-        filename: 'bundle.js',
+        //contenthash to give different name for bundle.js each time it builds
+        filename: 'bundle.[contenthash].js',
         path: path.resolve(__dirname,'./dist'),
-        publicPath: 'dist/'
+        publicPath: ''
     },
     mode: 'none',
     module: {
@@ -41,9 +44,15 @@ module.exports={
         ]
     },
     plugins:[
+        //To reduce the bundle.js file size
         new TerserPlugin(),
+        //To obtain css bundle file separately
         new MiniCSSExtractPlugin({
-            filename: 'style.css'
-        })
+            filename: 'style.[contenthash].css'
+        }),
+        //To clean the bundle.js folder before each new build
+        new CleanWebpackPlugin(),
+        //To update the bundle file reference after using contenthash
+        new HtmlWebpackPlugin()
     ]
 };
