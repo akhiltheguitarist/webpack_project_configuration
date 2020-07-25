@@ -1,4 +1,4 @@
-import * as Sunrise from './sunrise.png';
+import Sunrise from './sunrise.png';
 
 function addImage() {
     const img = document.createElement('img');

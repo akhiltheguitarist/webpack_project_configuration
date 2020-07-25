@@ -1,0 +1,17 @@
+$font-size: 20px;
+$background-color: green;
+$outline-config: none;
+$text-color: red;
+
+.button-style-scss-button{
+    font-size: $font-size;
+    padding: 7px 15px;
+    background: $background-color;
+    color: white;
+    outline: $outline-config;
+}
+
+.button-style-scss-p{
+    color: $text-color;
+    font-weight: bold;
+}
