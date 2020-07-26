@@ -9,6 +9,10 @@ helloWorldButtonObj.render();
 const buttonStyleSCSSObj = new buttonStyleSCSS();
 buttonStyleSCSSObj.render();
 
+if(process.env.NODE_ENV === 'production'){
+    console.log('production build');
+}
+
 /*
 //For the helloWorld render
 helloWorld();
