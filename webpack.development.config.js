@@ -5,7 +5,10 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports={
-    entry: './src/index.js',
+    entry: {
+        'home': './src/index.js',
+        'rose-image': './src/rose-image.js'
+    },
     output: {
         //contenthash to give different name for bundle.js each time it builds
         filename: 'bundle.[contenthash].js',
@@ -58,12 +61,23 @@ module.exports={
         }),
         //To clean the bundle.js folder before each new build
         new CleanWebpackPlugin(),
-        //To update the bundle file reference after using contenthash
+         //To update the bundle html reference after using contenthash
+        /*
         new HtmlWebpackPlugin({
             title: 'App Title',
             meta: {
                 description: 'Sample App'
             }
+        }), */
+        new HtmlWebpackPlugin({
+            filename: 'home.html',
+            chunks: ['home'],
+            title: 'home page'
+        }), 
+        new HtmlWebpackPlugin({
+            filename: 'rose-image.html',
+            chunks: ['rose-image'],
+            title: 'rose page'
         })
     ]
 };

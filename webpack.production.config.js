@@ -5,10 +5,15 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports={
-    entry: './src/index.js',
+    //Multiple entries are given for multi-page applications
+    entry: {
+        'home': './src/index.js',
+        'rose-image': './src/rose-image.js'
+    },
     output: {
         //contenthash to give different name for bundle.js each time it builds
-        filename: 'bundle.[contenthash].js',
+        //[name] is given to get different bundle files for different pages
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname,'./dist'),
         publicPath: ''
     },
@@ -49,16 +54,27 @@ module.exports={
         new TerserPlugin(),
         //To obtain css bundle file separately
         new MiniCSSExtractPlugin({
-            filename: 'style.[contenthash].css'
+            filename: '[name].[contenthash].css'
         }),
         //To clean the bundle.js folder before each new build
         new CleanWebpackPlugin(),
-        //To update the bundle file reference after using contenthash
+        //To update the bundle html reference after using contenthash
+        /*
         new HtmlWebpackPlugin({
             title: 'App Title',
             meta: {
                 description: 'Sample App'
             }
+        }), */
+        new HtmlWebpackPlugin({
+            filename: 'home.html',
+            chunks: ['home'],
+            title: 'home page'
+        }), 
+        new HtmlWebpackPlugin({
+            filename: 'rose-image.html',
+            chunks: ['rose-image'],
+            title: 'rose page'
         })
     ]
 };
