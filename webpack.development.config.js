@@ -14,6 +14,11 @@ module.exports={
     },
     //mode can be none/production/development
     mode: 'development',
+    devServer : {
+        contentBase :path.resolve(__dirname,'./dist'),
+        index: 'index.html',
+        port: 8000
+    },
     module: {
         rules:[
            {
