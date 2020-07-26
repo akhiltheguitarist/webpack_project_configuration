@@ -12,7 +12,8 @@ module.exports={
         path: path.resolve(__dirname,'./dist'),
         publicPath: ''
     },
-    mode: 'none',
+    //mode can be none/production/development
+    mode: 'production',
     module: {
         rules:[
            {
@@ -53,6 +54,11 @@ module.exports={
         //To clean the bundle.js folder before each new build
         new CleanWebpackPlugin(),
         //To update the bundle file reference after using contenthash
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            title: 'App Title',
+            meta: {
+                description: 'Sample App'
+            }
+        })
     ]
 };
